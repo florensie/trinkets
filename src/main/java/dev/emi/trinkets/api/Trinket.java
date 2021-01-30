@@ -6,12 +6,15 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -105,6 +108,14 @@ public interface Trinket {
 			}
 		}
 		return map;
+	}
+
+	/**
+	 * Returns a list of status effects to be permanently active while wearing the trinket.
+	 * Note that the duration of the supplied {@link StatusEffectInstance}s will be ignored.
+	 */
+	default List<StatusEffectInstance> getStatusEffects(ItemStack stack, SlotReference slot, LivingEntity entity) {
+		return Collections.emptyList();
 	}
 
 	default void onBreak(ItemStack stack, SlotReference slot, LivingEntity entity) {

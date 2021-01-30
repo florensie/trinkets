@@ -6,8 +6,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class TestTrinket extends TrinketItem {
@@ -23,5 +27,10 @@ public class TestTrinket extends TrinketItem {
 		Multimap<EntityAttribute, EntityAttributeModifier> modifiers = super.getModifiers(stack, slot, entity, uuid);
 		modifiers.put(EntityAttributes.GENERIC_MOVEMENT_SPEED, SPEED_BOOST_MODIFIER);
 		return modifiers;
+	}
+
+	@Override
+	public List<StatusEffectInstance> getStatusEffects(ItemStack stack, SlotReference slot, LivingEntity entity) {
+		return Collections.singletonList(new StatusEffectInstance(StatusEffects.NIGHT_VISION));
 	}
 }
